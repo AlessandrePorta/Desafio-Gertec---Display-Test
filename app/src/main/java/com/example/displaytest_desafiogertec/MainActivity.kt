@@ -29,9 +29,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun makeTestAgain(){
+        fragment = FragmentDisplayTest()
         binding.btStart.visibility = View.INVISIBLE
         val fragmentManager = supportFragmentManager.beginTransaction()
-        fragmentManager.replace(R.id.fcvMain, FragmentDisplayTest(), "Display Test").commit()
+        fragmentManager.replace(R.id.fcvMain, fragment, "Display Test").commit()
     }
 
     fun removeFragment(){
