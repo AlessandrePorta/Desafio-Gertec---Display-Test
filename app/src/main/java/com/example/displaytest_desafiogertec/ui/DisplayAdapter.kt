@@ -7,10 +7,10 @@ import com.example.displaytest_desafiogertec.R
 import com.example.displaytest_desafiogertec.databinding.ItemTestBinding
 
 class DisplayAdapter(
-    private val item : MutableList<DisplayTestVO>,
-    private val onItemClicked : (DisplayTestVO) -> Unit,
-    private val dimension : Pair<Int, Int>
-) : RecyclerView.Adapter<DisplayAdapter.ItemViewHolder>(){
+    private val item: MutableList<DisplayTestVO>,
+    private val onItemClicked: (DisplayTestVO) -> Unit,
+    private val dimension: Pair<Int, Int>
+) : RecyclerView.Adapter<DisplayAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(private val binding: ItemTestBinding) :
         RecyclerView.ViewHolder(binding.root) {
