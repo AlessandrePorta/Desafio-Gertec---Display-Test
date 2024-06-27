@@ -2,6 +2,7 @@ package com.example.displaytest_desafiogertec.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,8 @@ class FragmentDisplayTest : Fragment() {
 
     private lateinit var displayList: MutableList<DisplayTestVO>
 
+    private lateinit var timer: CountDownTimer
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,6 +38,7 @@ class FragmentDisplayTest : Fragment() {
         displayList = mutableListOf()
         createList()
         setupAdapter(displayList)
+        countdown()
     }
 
     private fun setupAdapter(response: MutableList<DisplayTestVO>) {
@@ -47,7 +51,7 @@ class FragmentDisplayTest : Fragment() {
     private fun clickOnDisplay(displayTestVO: DisplayTestVO) {
         displayTestVO.item = true
         if (checkList()) {
-
+            timer.cancel()
             binding.btPassed.visibility = View.VISIBLE
             binding.btPassed.setOnClickListener {
                 Toast.makeText(
@@ -75,26 +79,38 @@ class FragmentDisplayTest : Fragment() {
         return true
     }
 
-    private fun createList(){
+    private fun createList() {
         val start = 0
         val end = 23
-        for(a in start..end){
+        for (a in start..end) {
             displayList.add(DisplayTestVO(false))
         }
     }
 
-    private fun getSize() : Pair<Int, Int> {
+    private fun getSize(): Pair<Int, Int> {
         val displayMetrics = DisplayMetrics()
         (activity as MainActivity).windowManager.defaultDisplay.getMetrics(displayMetrics)
         val height = displayMetrics.heightPixels
         val width = displayMetrics.widthPixels
-        val heightMetrics = height/6 - dpFromPx(requireContext(), 4f)
-        val widthMetrics = width/4 - dpFromPx(requireContext(), 4f)
+        val heightMetrics = height / 6 - dpFromPx(requireContext(), 4f)
+        val widthMetrics = width / 4 - dpFromPx(requireContext(), 4f)
 
         return Pair(heightMetrics.toInt(), widthMetrics.toInt())
     }
 
     private fun dpFromPx(context: Context, px: Float): Float {
         return px / context.resources.displayMetrics.density
+    }
+
+    private fun countdown() {
+        timer = object : CountDownTimer(10000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+            }
+
+            override fun onFinish() {
+                Toast.makeText(requireContext(), "Teste falhou", Toast.LENGTH_LONG).show()
+                (activity as MainActivity).removeFragment()
+            }
+        }.start()
     }
 }

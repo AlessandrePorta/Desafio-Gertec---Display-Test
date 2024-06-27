@@ -1,7 +1,9 @@
 package com.example.displaytest_desafiogertec
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.displaytest_desafiogertec.databinding.ActivityMainBinding
@@ -40,4 +42,6 @@ class MainActivity : AppCompatActivity() {
         fragmentManager.remove(fragment).commit()
         binding.btStart.visibility = View.VISIBLE
     }
+
+
 }
